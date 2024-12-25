@@ -26,3 +26,21 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    import csv
+
+    direccion='files/input/data.csv'
+    datos=[]
+    with open(direccion, mode='r', newline='', encoding='utf-8') as archivo:
+        lector = csv.reader(archivo)
+        for fila in lector:
+            datos.append(fila[0][9:11])
+    conteo={}
+    for mes in datos:
+        if mes in conteo:
+         conteo[mes]+=1
+        else:
+            conteo[mes]=1
+
+    resultado = sorted(conteo.items())
+    return resultado
+pregunta_04()

@@ -27,3 +27,31 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    import csv
+    from collections import defaultdict
+
+
+
+    direccion='files/input/data.csv'
+    data=[]
+    with open(direccion, mode='r', newline='', encoding='utf-8') as archivo:
+            lector = csv.reader(archivo)
+            for fila in lector:
+                fila_limpia=[ item for sublist in [x.replace(",","\t").split("\t")for x in fila ]for item in sublist]
+                data.append(fila_limpia)
+    assoc_dict = defaultdict(set)  # Usamos set para evitar letras repetidas
+
+
+    for row in data:
+        letter = row[0]  
+        value = int(row[1])  
+    
+
+        assoc_dict[value].add(letter)
+
+
+    result = sorted((key, sorted(list(value))) for key, value in assoc_dict.items())
+
+
+    return result
+pregunta_08()
